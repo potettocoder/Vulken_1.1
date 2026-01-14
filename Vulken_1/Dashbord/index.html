@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulken Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fade-in">
+
+    <!-- Background Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Topbar: search + profile -->
+    <div class="topbar">
+        <div class="search-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="search" placeholder="Search tickets..." aria-label="Search tickets">
+        </div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+        <div class="profile-circle" id="profileBtn">AB</div>
+        <div class="profile-dropdown" id="profileDropdown" style="display:none;position:absolute;right:18px;top:64px;background:rgba(0,0,0,0.6);padding:8px;border-radius:8px;backdrop-filter:blur(6px);min-width:180px">
+            <button class="dropdown-item" id="openProfileSettings" style="background:transparent;border:0;color:#fff;padding:8px 10px;width:100%;text-align:left;cursor:pointer">Profile Settings</button>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>Vulken</h1>
+    <a class="button-teal" href="#">Dashboard</a>
+    <a class="button-teal" href="ongoing-tickets.html">Ongoing Tickets</a>
+    <a class="button-teal" href="pending-tickets.html">Pending Tickets</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Welcome to Vulken Dashboard</h2>
+
+        <!-- Top row: four stat cards -->
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">Ongoing</div>
+                <div class="card-count" id="ongoing-count">24</div>
+                <div class="card-sub">Updated: 2m ago</div>
+                <div class="card-stats">+5 this week</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Pending</div>
+                <div class="card-count" id="pending-count">8</div>
+                <div class="card-sub">Updated: 10m ago</div>
+                <div class="card-stats">-2 this week</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Overdue</div>
+                <div class="card-count" id="overdue-count">3</div>
+                <div class="card-sub">Updated: 1h ago</div>
+                <div class="card-stats">+1 this week</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Resolved</div>
+                <div class="card-count" id="resolved-count">112</div>
+                <div class="card-sub">Updated: today</div>
+                <div class="card-stats">+12 this week</div>
+            </div>
+        </div>
+
+        <!-- Below the top stats: two separate cards (Statistics, Recent Updates) -->
+        <div class="below-cards">
+            <div class="card">
+                <div class="card-title">Statistics</div>
+                <p style="color:rgba(255,255,255,0.85); margin:0">Summary: <strong>+16</strong> tickets change this week. Resolution rate: <strong>78%</strong>.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Recent Updates</div>
+                <ul class="updates-list">
+                    <li><strong>#342</strong> ticket resolved — 5m ago</li>
+                    <li><strong>#341</strong> assigned to John — 12m ago</li>
+                    <li><strong>#339</strong> reopened — 1h ago</li>
+                    <li><strong>#337</strong> pending review — today</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Profile Settings Modal -->
+    <div id="profileModal" class="modal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;z-index:40">
+        <div class="modal-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.5)"></div>
+        <div class="modal-panel" style="position:relative;background:rgba(17,17,17,0.9);padding:20px;border-radius:12px;z-index:41;width:420px;max-width:90%">
+            <h3 style="margin-top:0">Profile Settings</h3>
+            <label for="profileName">Display name</label>
+            <input id="profileName" type="text" style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.25);color:#fff">
+            <label for="profileAvatar">Avatar (image URL)</label>
+            <input id="profileAvatar" type="url" placeholder="https://..." style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.25);color:#fff">
+            <label for="profileAvatarFile" style="margin-top:6px;display:block">Or upload an image</label>
+            <input id="profileAvatarFile" type="file" accept="image/*" style="width:100%;padding:6px;margin:6px 0;color:#fff;background:transparent">
+            <div id="avatarPreview" style="height:64px;width:64px;border-radius:8px;overflow:hidden;margin-top:8px;border:1px solid rgba(255,255,255,0.06)"></div>
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+                <button id="closeProfileModal" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:8px 12px;border-radius:8px">Cancel</button>
+                <button id="saveProfileBtn" style="background:var(--teal);border:1px solid rgba(0,0,0,0.12);color:#002;padding:8px 12px;border-radius:8px;font-weight:700;box-shadow:0 6px 18px rgba(0,173,181,0.12)">Save</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // sample population of card counts (replace with real data)
+        document.getElementById('ongoing-count').textContent = 24;
+        document.getElementById('pending-count').textContent = 8;
+        document.getElementById('overdue-count').textContent = 3;
+        document.getElementById('resolved-count').textContent = 112;
+    </script>
+</body>
+</html>

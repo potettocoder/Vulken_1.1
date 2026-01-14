@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: black;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Canvas Background */
+#bgCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  color: white;
+  z-index: 5;
+}
+
+.navbar-logo { font-size: 2rem; font-weight: 900; color: #fff; }
+.navbar-contact { color: #00adb5; font-weight: 600; cursor: pointer; }
+
+/* Center container */
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sign-In Box */
+.signin-box {
+  position: relative;
+  z-index: 2;
+  max-width: 400px;
+  width: 90%;
+  padding: 3rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+  color: white;
+}
+.signin-box.show { opacity: 1; transform: translateY(0); }
+
+.rounded-input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  margin: 1rem 0;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-size: 1rem;
+}
+.rounded-input::placeholder { color: rgba(255,255,255,0.7); }
+
+.rounded-button {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 20px;
+  background: #00adb5;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.rounded-button:hover {
+  background: white; 
+  color: #00adb5;
+  transition-duration: 0.8s;
+}
+
+/* Forgot Password */
+.forgot { list-style: none; margin-top: 1rem; }
+.forgot li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+}
+.forgot li a::after {
+  content: '';
+  position: absolute; left: 50%; bottom: -2px;
+  width: 0; height: 2px; background: #00adb5;
+  transform: translateX(-50%);
+  transition: width 0.8s ease;
+}
+.forgot li a:hover::after { width: 100%; }
+
+/* Modal */
+.forgot-modal {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  display:flex; justify-content:center; align-items:center;
+  opacity:0; pointer-events:none; transition:0.3s;
+  z-index: 10;
+}
+.forgot-modal.show { opacity:1; pointer-events:auto; }
+.modal-content {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  color:white;
+  padding:2rem;
+  border-radius:15px;
+  text-align:center;
+  position:relative;
+  z-index: 11;
+}
+.close-btn { position: absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem; }

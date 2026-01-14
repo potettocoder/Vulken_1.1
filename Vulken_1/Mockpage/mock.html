@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulken — Tickets (Mock)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fade-in">
+
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Main Content (no sidebar/topbar/profile) -->
+    <div class="main-content">
+        <h2>Tickets</h2>
+
+        <!-- Tickets section (visible by default on mock) -->
+        <section id="tickets" class="tickets-section" aria-hidden="false">
+            <h3 style="margin-top:0">Send a Ticket</h3>
+            <form id="ticketForm">
+                <label for="ticketTitle">Title</label>
+                <input id="ticketTitle" name="title" type="text" placeholder="Short summary" required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.25);color:#fff">
+                <label for="ticketBody">Describe the issue</label>
+                <textarea id="ticketBody" name="body" rows="4" placeholder="Describe the problem..." required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.25);color:#fff"></textarea>
+                <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+                    <button type="submit" id="sendTicketBtn" style="background:var(--teal);border:none;padding:10px 14px;border-radius:8px;color:#002;font-weight:700;cursor:pointer">Send Ticket</button>
+                </div>
+            </form>
+
+            <div style="margin-top:18px">
+                <h4>Sent Tickets</h4>
+                <div id="sentTickets" class="sent-tickets" style="margin-top:8px;display:grid;gap:8px"></div>
+            </div>
+        </section>
+
+        <!-- Cards removed for Mockpage: only tickets section is shown -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

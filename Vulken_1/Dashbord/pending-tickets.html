@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pending Tickets - Vulken</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fade-in">
+  <canvas id="bgCanvas"></canvas>
+  <div class="topbar">
+    <div class="search-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" placeholder="Search tickets..." aria-label="Search tickets">
+    </div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+    <div class="profile-circle">AB</div>
+  </div>
+  <div class="sidebar">
+    <h1>Vulken</h1>
+    <a class="button-teal" href="index.html">Dashboard</a>
+    <a class="button-teal" href="ongoing-tickets.html">Ongoing Tickets</a>
+  <a class="button-teal" href="pending-tickets.html">Pending Tickets</a>
+  </div>
+
+  <div class="main-content">
+    <h2 style="font-weight:700;">Pending Tickets</h2>
+    <div class="tickets">
+      <div class="ticket-box">
+        <div class="ticket-id">#350</div>
+        <div class="ticket-title">Payment reconciliation</div>
+        <div class="ticket-meta">Reported by: Ops • Priority: High</div>
+      </div>
+      <div class="ticket-box">
+        <div class="ticket-id">#349</div>
+        <div class="ticket-title">UI misalignment on mobile</div>
+        <div class="ticket-meta">Reported by: QA • Priority: Medium</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
